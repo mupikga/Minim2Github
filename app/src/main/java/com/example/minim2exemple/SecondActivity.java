@@ -33,10 +33,11 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        init();
+        getUser();
+        getFollowers();
     }
 
-    public void init() {
+    public void getUser() {
 
         SharedPreferences sharedPref = getSharedPreferences("username", Context.MODE_PRIVATE);
         String username = sharedPref.getString("User", null);
@@ -72,16 +73,17 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
     }
-        public void init2(){
 
-            Log.i("USer", "username1");
+    public void getFollowers(){
 
-            SharedPreferences sharedPref = getSharedPreferences("username", Context.MODE_PRIVATE);
-            String username = sharedPref.getString("User",null);
+        Log.i("USer", "username1");
 
-            Log.i("USer", "username2");
+        SharedPreferences sharedPref = getSharedPreferences("username", Context.MODE_PRIVATE);
+        String username = sharedPref.getString("User",null);
 
-        /*Gson gson = new GsonBuilder().setLenient().create();
+        Log.i("USer", "username2");
+
+        Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
         API gerritAPI = retrofit.create(API.class);
         Call<List<Users>> call = gerritAPI.getFollowers(username);
@@ -92,7 +94,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
                 List<Users> userList =  response.body();
                 ListAdapter listAdapter =new ListAdapter(userList, SecondActivity.this);
-                RecyclerView recyclerView = findViewById(R.id.ListRecyclerView);
+                RecyclerView recyclerView = findViewById(R.id.listRecyclerView);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this));
                 recyclerView.setAdapter(listAdapter);
@@ -105,31 +107,6 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-        });*/
-            Log.i("USer", "username3");
-
-            TextView followers = (TextView) findViewById(R.id.followers);
-            TextView repos = (TextView) findViewById(R.id.repositories);
-
-            Gson gson = new GsonBuilder().setLenient().create();
-            Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
-            API gerritAPI = retrofit.create(API.class);
-            Call<Users> call = gerritAPI.getInfo(username);
-            Log.i("USer", username);
-
-            call.enqueue(new Callback<Users>() {
-                @Override
-                public void onResponse(Call<Users> call, Response<Users> response) {
-                    Users user =  response.body();
-                    followers.setText("Followers: " + user.getFollowers());
-                    repos.setText("Repositories: " + user.getRepos());
-                }
-
-                @Override
-                public void onFailure(Call<Users> call, Throwable t) {
-                    Intent intent = new Intent (getApplicationContext(), Error.class);
-                    startActivity(intent);
-                }
             });
 
     }}

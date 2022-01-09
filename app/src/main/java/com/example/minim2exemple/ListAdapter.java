@@ -1,4 +1,4 @@
-//package com.example.minim2exemple;
+package com.example.minim2exemple;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-//public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
-/*
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+
     private List<Users> dades;
     private LayoutInflater mInflater;
     private Context context;
@@ -65,5 +65,5 @@ import java.util.List;
         }
 
 
-    }*/
-//}
+    }
+}
